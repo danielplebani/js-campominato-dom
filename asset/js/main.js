@@ -13,11 +13,11 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 */
 
 const difficulty = document.querySelector('select');
-
 const startGame = document.querySelector('button');
 
-startGame.addEventListener('click', function (){
-    console.log("l'utente ha iniziato il gioco");
+startGame.addEventListener('click', function () {
+
+    console.log('Hai iniziato il gioco!');
 
     startGame.className = 'd-none';
     difficulty.className = 'd-none';
@@ -30,12 +30,25 @@ startGame.addEventListener('click', function (){
 
     let limit;
     if (difficulty.value === '1') {
-       limit = 100;
+        limit = 100;
     } else if (difficulty.value === '2') {
-       limit = 81;
+        limit = 81;
     } else {
-       limit = 49;
+        limit = 49;
     }
+
+    const bombNumbers = [];
+
+    while (bombNumbers.length < 16) {
+        const bomb = Math.floor(Math.random() * limit + 1);
+        if (!bombNumbers.includes(bomb)) {
+            bombNumbers.push(bomb);
+        }
+
+        console.log('il numero ' + bomb + ' è una bomba');
+    }
+
+    let clicked = 0;
 
     for (let i = 1; i <= limit; i++) {
         const cell = document.createElement('div');
@@ -44,24 +57,36 @@ startGame.addEventListener('click', function (){
 
         grill.append(cell);
 
-        cell.addEventListener('click', function (){
-            cell.classList.toggle('bg-primary');
-            console.log('hai cliccato sulla cella numero: ' + i);
-        })
-    }
+        cell.addEventListener('click', function oneClick() {
+            cell.classList.add('bg-primary');
+            console.log('Hai cliccato sulla cella numero: ' + i);
 
-    const bombNumbers = [];
-    
-    while (bombNumbers.length < 16) {
-        const bomb = Math.floor(Math.random() * limit + 1);
-        if (!bombNumbers.includes(bomb)) {
-            bombNumbers.push(bomb);
-        }
+            if (bombNumbers.includes(i)) {
+
+                console.log('Hai perso');
+                cell.classList.add('bg-danger');
+
+                const result = document.querySelector('h2');
+                result.classList.remove('d-none');
+                result.textContent = 'Hai perso!';
+
+                grill.style.pointerEvents = 'none';
+
+                const score = document.querySelector('span');
+                score.classList.remove('d-none');
+                score.textContent = 'Il tuo punteggio: ' + clicked;
+            } else {
+                cell.removeEventListener('click', oneClick);
+
+                clicked++;
+
+                if (clicked === limit - 16) {
+                    console.log('Hai vinto!');
+                    const result = document.querySelector('h2');
+                    result.classList.remove('d-none');
+                    result.textContent = 'Hai vinto!';
+                }
+            }
+        });
     }
-    
-    for (let i = 1; i <= limit; i++) {
-        if (bombNumbers.includes(i)) {
-            console.log('Il numero ' + i + ' è una bomba!');
-        } 
-    }
-}) 
+});

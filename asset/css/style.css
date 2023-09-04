@@ -18,3 +18,30 @@
     padding: 0;
     margin: 20px;
 }
+
+h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    border: 5px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    color: black;
+    font-size: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+span {
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 10px;
+    color: red;
+    font-size: xx-large;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
