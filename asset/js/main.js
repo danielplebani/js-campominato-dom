@@ -49,4 +49,19 @@ startGame.addEventListener('click', function (){
             console.log('hai cliccato sulla cella numero: ' + i);
         })
     }
-})
+
+    const bombNumbers = [];
+    
+    while (bombNumbers.length < 16) {
+        const bomb = Math.floor(Math.random() * limit + 1);
+        if (!bombNumbers.includes(bomb)) {
+            bombNumbers.push(bomb);
+        }
+    }
+    
+    for (let i = 1; i <= limit; i++) {
+        if (bombNumbers.includes(i)) {
+            console.log('Il numero ' + i + ' è una bomba!');
+        } 
+    }
+}) 
