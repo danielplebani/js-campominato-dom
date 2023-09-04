@@ -17,8 +17,6 @@ const startGame = document.querySelector('button');
 
 startGame.addEventListener('click', function () {
 
-    console.log('Hai iniziato il gioco!');
-
     startGame.className = 'd-none';
     difficulty.className = 'd-none';
 
@@ -44,8 +42,6 @@ startGame.addEventListener('click', function () {
         if (!bombNumbers.includes(bomb)) {
             bombNumbers.push(bomb);
         }
-
-        console.log('il numero ' + bomb + ' è una bomba');
     }
 
     let clicked = 0;
@@ -59,11 +55,9 @@ startGame.addEventListener('click', function () {
 
         cell.addEventListener('click', function oneClick() {
             cell.classList.add('bg-primary');
-            console.log('Hai cliccato sulla cella numero: ' + i);
 
             if (bombNumbers.includes(i)) {
 
-                console.log('Hai perso');
                 cell.classList.add('bg-danger');
 
                 const result = document.querySelector('h2');
@@ -82,7 +76,6 @@ startGame.addEventListener('click', function () {
                 clicked++;
 
                 if (clicked === limit - 16) {
-                    console.log('Hai vinto!');
                     const result = document.querySelector('h2');
                     result.classList.remove('d-none');
                     result.textContent = 'Hai vinto!';
