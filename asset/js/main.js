@@ -75,6 +75,7 @@ startGame.addEventListener('click', function () {
                 const score = document.querySelector('span');
                 score.classList.remove('d-none');
                 score.textContent = 'Il tuo punteggio: ' + clicked;
+
             } else {
                 cell.removeEventListener('click', oneClick);
 
